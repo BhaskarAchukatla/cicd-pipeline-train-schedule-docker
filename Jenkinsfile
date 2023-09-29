@@ -3,8 +3,11 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                script {
+                    sh './gradlew wrapper --gradle-version=7.0'
+                }
                 echo 'Running build automation'
-                sh './gradlew wrapper --gradle-version=7.0'
+                sh './gradlew build --no-daemon'
                 archiveArtifacts artifacts: 'dist/trainSchedule.zip'
             }
         }
